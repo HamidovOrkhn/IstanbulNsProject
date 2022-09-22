@@ -1,0 +1,219 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using Microsoft.AspNetCore.Mvc.Localization
+@using IstanbulNsApp.Repositories
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+<section id="slider">
+    <div class="row m-0">
+        <div class="col-12 p-0">
+            <div class="window">
+                <video loop autoplay muted id="video1" class="video1">
+                    <source src="~/indexlayout/video/%c4%b0stanbul%20Ns%20Klinika.mp4" type="video/mp4">
+                </video>
+                <div class="text-slider">
+                    <p>Etibarınızı daim doğrultmağa çalışırıq!</p>
+                    <h1>GÜVƏNDİYİNİZ TİBBİ XİDMƏT</h1>
+                    <div class="btn-ns doc-links mr-4">
+
+                        <a href="https://app.acuityscheduling.com/schedule.php?owner=19011537" target="_blank" class="acuity-embed-buttons">@SharedLocalizer["Həkim qəbuluna yazıl"]</a>
+                        <script src="../embed.acuityscheduling.com/embed/button/19011537.js" async></script>
+                    </div>
+                    <div class="btn-ns doc-links">
+                        <a href="hekimlerimiz.html">@SharedLocalizer["HƏKİMƏ SUAL VER"]</a>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close mr-3 mt-1" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12" style="text-align:center">
+                                            <h2>@TempData["ServerResponseSuccess"]</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12" style="text-align:center;">
+                                            <p style="font-size:20px" class="m-3">@SharedLocalizer["Növbə kodları ilə sorğunuzun nəticəsi ilə bağlı məlumatları ala bilərsiniz"]</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary p-2 m-2" data-dismiss="modal">@SharedLocalizer["Bağla"]</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lower-part-video">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-3 col-sm-3">
+                                        <span><i class="fas fa-building"></i></span>
+                                    </div>
+
+                                    <div class="col-lg-10 col-md-3 col-sm-3">
+                                        <div>
+                                            <span class="d-block text-white">Ünvan</span>
+                                            <a href="https://goo.gl/maps/KgKMgksm9UGpdNtP7" target="_blank" class="about-us-info">Bakı, 140 Atatürk prospekti</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-3 col-sm-3">
+                                        <span><i class="fas fa-phone"></i></span>
+                                    </div>
+
+                                    <div class="col-lg-10 col-md-3 col-sm-3">
+                                        <div>
+                                            <span class="d-block text-white">Bizimlə əlaqə</span>
+                                            <span class="dif-color">Çağrı Mərkəzi: <span class="about-us-info"><a href="tel:+994124658500" class="about-us-info tel-number">(012) 465-85-00</a></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-3 col-sm-3">
+                                        <span><i class="far fa-calendar-check"></i></span>
+                                    </div>
+
+                                    <div class="col-lg-10 col-md-3 col-sm-3">
+                                        <div>
+                                            <span class="d-block text-white">Online qeydiyyat</span>
+                                            <span class="dif-color">
+                                                Həkim qəbuluna <a href="#"
+                                                                  class="about-us-info here">buradan</a>
+                                                yazılın
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="service">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12 col-lg-4"></div>
+            <div class="col-12 col-lg-8">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-heading">
+                            <h3>Istanbul NS Klinika</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <div class="service-main">
+                            <i class="fas fa-user-md"></i>
+                            <h3>@SharedLocalizer["Mütəxəssis həkimlər"]</h3>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="service-main">
+                            <i class="fad fa-clinic-medical"></i>
+                            <h3>@SharedLocalizer["Rahat cərrahi otaqlar"]</h3>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="service-main">
+                            <i class="fas fa-flask"></i>
+                            <h3>@SharedLocalizer["Müasir standartlara uyğun laboratoriya"]</h3>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="service-main">
+                            <i class="fas fa-users"></i>
+                            <h3>@SharedLocalizer["Peşəkar tibbi komanda"]</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="image-service">
+        <img src="~/indexlayout/images/picture-ns.png" alt="">
+    </div>
+</section>
+
+<section id="event">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-5">
+                <div class="main-event">
+                    <div class="image-event">
+                        <div class="overlay-image"></div>
+                        <img src="~/indexlayout/images/event.png" alt="">
+                    </div>
+                    <!-- <div class="event-info">
+                        <a href="#">Poliklinika şöbəsinin müdiri Azra Amanova şöbənin illik hesabatını təqdim edərək əvvəlcə tibbi personal haqqında qısa məlumat verib. O, şöbədə bölmələr üzrə aparılan müayinələrin statistikasını da diqqətə çatdıraraq bildirib ki, 16088 xəstə rentgen, 4263 xəstə KT, 4738 xəstə MRT müayinəsindən keçib.
+                        </a>
+                        <p>12-12-2019</p>
+                    </div> -->
+                </div>
+
+            </div>
+            <div class="col-12 col-lg-7">
+                <a href="264-krnclnm-ndr.html">
+                    <div class="small-event">
+                        <p>Dün, 01:32</p>
+                        <h3>KİRƏNCLƏNMƏ NƏDİR?</h3>
+                    </div>
+                </a> <a href="246-sac-kimin-endirim.html">
+                    <div class="small-event">
+                        <p>1-04-2020, 13:16</p>
+                        <h3>Saç əkiminə Endirim!</h3>
+                    </div>
+                </a> <a href="259-bu-kimdir.html">
+                    <div class="small-event">
+                        <p>18-02-2021, 02:48</p>
+                        <h3>BU KiMDiR?</h3>
+                    </div>
+                </a> <a href="269-reflunuz-md-qicqirmaniz-varsa-n-etml-.html">
+                    <div class="small-event">
+                        <p>Dün, 01:53</p>
+                        <h3>REFLUNUZ ! MƏDƏ QICQIRMANIZ VARSA NƏ ETMƏLİ !</h3>
+                    </div>
+                </a>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js" integrity="sha512-XKa9Hemdy1Ui3KSGgJdgMyYlUg1gM+QhL6cnlyTe2qzMCYm4nAZ1PsVerQzTTXzonUR+dmswHqgJPuwCq1MaAg==" crossorigin="anonymous"></script>
+    @if (TempData["ServerResponseSuccess"] != null)
+    {
+        <script>
+            $("#exampleModalCenter").modal("show");
+        </script>
+    }
+
+}

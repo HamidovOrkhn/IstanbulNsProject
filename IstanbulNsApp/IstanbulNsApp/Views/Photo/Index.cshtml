@@ -1,0 +1,35 @@
+﻿@{
+}
+@await Component.InvokeAsync("Partial")
+@model List<Photo>
+<section id="gallery">
+    <div class="container">
+        <div class="row">
+            <div class="row mt-5">
+                @foreach (var item in Model)
+                {
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-0">
+                        <div class="one-photo">
+                            <div class="photo-overlay">
+                                <div class="photo-icon">
+                                    <i class="fal fa-eye" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <img src="~/indexlayout/images/@item.Name" alt="">
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner-slider">
+            <div class="inner-slide">
+                <img src="img/bg-15.html" alt="">
+            </div>
+            <i class="close fas fa-times"></i>
+        </div>
+    </div>
+</section>

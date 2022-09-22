@@ -1,0 +1,137 @@
+﻿ <!-- End Header -->
+@model IstanbulNsApp.Resources.DTO.ServiceInfo
+<div id='dle-content'>
+    <link rel="stylesheet" href="../use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/indexlayout/css/tedbirler-etrafli.css">
+
+    <section id="doctor-main">
+        <div class="overlay-service"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>TƏDBİRLƏR</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section id="more-event">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-12">
+                        @await Component.InvokeAsync("Services")
+                    </div>
+
+                    <div class="col-lg-9 col-md-8 col-sm-12 col-12">
+                        <div id="read-event">
+                            <h3>@Model.Name</h3>
+                            @if (Model.Picture is null)
+                            {
+                                <img src="~/indexlayout/images/notfoundpicture.jpg" alt="@Model.Name">
+                            }
+                            else
+                            {
+                                <img src="~/uploads/@Model.Picture" alt="@Model.Name">
+                            }
+
+                            <div>
+                                <p>
+                                    @Model.Info
+                                    <br />
+                                    @foreach (var item in Model.Doctors)
+                                    {
+
+                                        <br />
+                                        @(item.Name+"-"+item.DoctorLevel)
+                                        <br />
+                                    }
+                                </p>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hekimlerimiz">
+            <div class="container">
+                <div class="text-center">
+                    <h3>HƏKİMLƏRİMİZ</h3>
+                    <p>
+                        Yüksək ixtisaslı, təcrübəli və qayğıkeş həkimlərimiz sağlamlığınızın qorunması üçün sizə
+                        keyfiyyətli tibbi yardım göstərməyə hər zaman hazırdır! Onların qəbuluna saytımızdan yazıla
+                        bilərsiniz.
+                    </p>
+                </div>
+
+                <div class="row">
+                    @foreach (var doctor in Model.Doctors)
+                    {
+                        string type = string.Empty;
+
+                        if (doctor.LevelType == 1)
+                        {
+                            type = "Dr.";
+                        }
+                        else if (doctor.LevelType == 2)
+                        {
+                            type = "T.e.c.";
+                        }
+                        else if (doctor.LevelType == 0)
+                        {
+                            type = string.Empty;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                        <div class="col-lg-4 col-md-6 col-sm-6 margin-top-30">
+                            <div class="our-doctor">
+                                <a class="doctor-img" href="238-dr-bhruz-mmmdov.html">
+                                    <div class="overlay"></div>
+                                    @if (doctor.Picture is null)
+                                    {
+                                        if (doctor.Sex == 1)
+                                        {
+                                            <img src="~/indexlayout/uploads/posts/2020-03/1584355056_man.png" alt="@doctor.Name">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/indexlayout/uploads/posts/2020-03/1584360828_woman.png" alt="@doctor.Name">
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <img src="~/uploads/@doctor.Picture" alt="@doctor.Name">
+                                    }
+
+                                </a>
+
+                                <div class="info-doctor">
+                                    <a href="" class="doc-name">@type@doctor.Name</a>
+                                    <span class="professional">@doctor.DoctorLevel
+                                    </span>
+                                    <a asp-controller="OnlineTurn" asp-action="Index" asp-route-doctor="@doctor.Id">QƏBULUNA YAZILMAQ</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </section>

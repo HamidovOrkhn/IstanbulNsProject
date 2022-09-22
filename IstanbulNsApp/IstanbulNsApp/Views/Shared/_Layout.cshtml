@@ -1,0 +1,419 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using IstanbulNsApp.Repositories
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from istanbulns.az/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Feb 2021 15:58:05 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Istanbul NS Klinikası</title>
+    <meta name="description" content="Istanbul NS Klinikası" />
+    <meta name="keywords" content="Istanbul NS Klinikası" />
+    <meta name="generator" content="by Hamza Huseynli (http://bcp.az)" />
+    <link rel="search" type="application/opensearchdescription+xml" href="~/indexlayout/engine/opensearch.php" title="Istanbul NS Klinikası" />
+    <link rel="alternate" type="application/rss+xml" title="Istanbul NS Klinikası" href="rss.xml" />
+    <script type="text/javascript" src="~/indexlayout/engine/classes/js/jquery.js"></script>
+    <script type="text/javascript" src="~/indexlayout/engine/classes/js/jqueryui.js"></script>
+    <script type="text/javascript" src="~/indexlayout/engine/classes/js/dle_js.js"></script>
+    <script type="text/javascript" src="~/indexlayout/engine/classes/html5player/mediaelement-and-player.min.js"></script>
+    <link media="screen" href="~/indexlayout/engine/editor/css/default.css" type="text/css" rel="stylesheet" />
+    <link media="screen" href="~/indexlayout/engine/classes/html5player/mediaelementplayer.css" type="text/css" rel="stylesheet" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JXNG9DQSX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-4JXNG9DQSX');
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/indexlayout/bootstrap-4.3.1-dist/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="~/indexlayout/bootstrap-4.3.1-dist/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="~/indexlayout/bootstrap-4.3.1-dist/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="~/indexlayout/bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="~/indexlayout/bootstrap-4.3.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="~/indexlayout/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/indexlayout/OwlCarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/indexlayout/OwlCarousel/owl.theme.default.min.css">
+    <link rel="icon" type="/favicon/image/png" href="~/indexlayout/images/favicon.png">
+    <link rel="stylesheet" href="~/indexlayout/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="yandex-verification" content="c41d4d7c73836a94" />
+    <script src="http://code.jivosite.com/widget/BvFuvDrqFz" async></script>
+
+
+
+</head>
+
+<body>
+
+    <!-- Start Header -->
+    <header id="header">
+        <div class="border-bottom-grey">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="row" id="first-line">
+                        <div class="col-xl-3 col-lg-2 col-md-2 col-sm-6 col-12">
+
+                            @await Component.InvokeAsync("Language")
+
+
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12">
+                            <div class="mail">
+                                <a href="mailto:info@istanbulns.az">
+                                    <span><i class="far fa-envelope"></i></span>
+                                    <span>info@istanbulns.az</span>
+
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 col-md-2 col-sm-6 col-5">
+                            <div class="wp-num">
+                                <a href="https://wa.me/994554678500" target="_blank">
+                                    <img src="~/indexlayout/images/wp-logo.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 col-md col-sm-6 col-7 mobile-padding-right text-xl-right">
+                            <div class="header-socials">
+                                <ul>
+                                    <li>
+                                        <a href="https://www.facebook.com/istanbulklinikans" target="_blank"><i class="fab fa-telegram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.facebook.com/istanbulklinikans" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="https://www.instagram.com/istanbul_ns_klinika/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="https://www.youtube.com/channel/UC1Hh6r6FYhdVXJq7kg6rtXw" target="_blank"><i class="fab fa-youtube"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="second-line">
+            <div class="container-fluid">
+                <div class="container">
+                    <div>
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6 col-6 pl-0">
+                                <a class="navbar-brand" href="index.html">
+                                    <img class="w-100" src="~/indexlayout/images/logo.png" alt="">
+                                    <!-- <span style="color: orange; font-weight: bold;">Istanbul NS<br>logo
+                                      </span> -->
+                                </a>
+
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                            </div>
+
+                            <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12">
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav mr-auto">
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="haqqimizda.html">@SharedLocalizer["Haqqımızda"]</a>
+
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link" style="cursor: pointer;">
+                                                @SharedLocalizer["Xidmətlərimiz"] <span class="sr - only"></span>
+                                            </a>
+
+                                            <div class="first-sub-menu">
+                                                @await Component.InvokeAsync("NavService")
+                                            </div>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-action="Doctors" asp-controller="Services">@SharedLocalizer["Həkimlər"]</a>
+
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="foto.html">@SharedLocalizer["Foto və Video"]</a>
+                                            <div class="first-sub-menu">
+                                                <ul>
+                                                    <li><a href="foto.html" class="main-link">@SharedLocalizer["Foto"]</a></li>
+                                                    <li><a href="video.html" class="main-link">@SharedLocalizer["Video"]</a></li>
+
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="xeberler.html">@SharedLocalizer["Xəbərlər"]</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="elaqe.html">@SharedLocalizer["Əlaqə"]</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6 col-6 call-div text-center text-sm-right text-xl-center">
+                                <div class="call-center">
+                                    <img src="~/indexlayout/images/call-us2.jpg" alt="">
+                                </div>
+                            </div>
+                        </nav>
+
+                        <div class="mobile-menu">
+                            <ul>
+                                <li class="sub-menu-mobile-li">
+                                    <a style="cursor: pointer;">@SharedLocalizer["Haqqımızda"]</a>
+                                </li>
+
+                                <li class="sub-menu-mobile-li">
+                                    <a style="cursor: pointer;">@SharedLocalizer["Xidmətlərimiz"]</a>
+                                    @await Component.InvokeAsync("NavService")
+                                </li>
+                                <li class="sub-menu-mobile-li">
+                                    <a asp-controller="Services" asp-action="Doctors">@SharedLocalizer["Həkimlər"]</a>
+                                </li>
+                                <li class="sub-menu-mobile-li">
+                                    <a href="foto.html">@SharedLocalizer["Foto və video"]</a>
+                                    <ul class="sub-menu-mobile">
+                                        <li>
+                                            <a href="107-anesteziologiya-v-reanimasiya.html">@SharedLocalizer["Foto"]</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="sub-menu-mobile-li">
+                                    <a href="xeberler.html">@SharedLocalizer["Xəbərlər"]</a>
+                                </li>
+                                <li class="sub-menu-mobile-li">
+                                    <a href="elaqe.html">@SharedLocalizer["Əlaqə"]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- End Header -->
+    <!-- Start Slider -->
+
+    @RenderBody()
+
+    <!-- End Slider -->
+
+    <section id="welcome">
+        <div class="container">
+
+        </div>
+    </section>
+
+    <!-- Start Menu Tabs --
+
+
+    <!-- End Events -->
+
+    <div id='dle-content'>           </div>
+
+    <section id="innovation">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div>
+                        <h3>@SharedLocalizer["Yeniliklərimizdən məlumatlı olun!"]</h3>
+                        <p>
+                            @SharedLocalizer["Elektron poçtunuzun ünvanını qeyd edin ki, maraqlı xəbərlər və endirimli aksiyalarımızdan faydalana biləsiniz."]
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                    <form action="#">
+                        <input type="text" placeholder="">
+                        <input class="btn-write" type="submit" value=@SharedLocalizer["YAZILMAQ"]>
+                        <a asp-controller="OnlineTurn" asp-action="Result" class="btn btn-info" style="margin-bottom:4px;text-transform:uppercase">@SharedLocalizer["Nəticələr"]</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Start Footer -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-6">
+                        <div>
+                            <h5>
+                                @SharedLocalizer["Haqqımızda"]
+                            </h5>
+
+                            <ul>
+                                <li><a href="haqqimizda.html">@SharedLocalizer["Haqqımızda"]</a></li>
+                                <li><a asp-controller="Services" asp-action="Doctors">@SharedLocalizer["Həkimlərimiz"]</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-6">
+                        <div>
+                            <h5>
+                                @SharedLocalizer["Xidmətlər"]
+                            </h5>
+
+                            @await Component.InvokeAsync("NavService")
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-2 col-sm-2 col-6">
+                        <div class="top-pixel">
+                            <h5>Əlavə</h5>
+
+                            <ul>
+                                <li><a href="foto.html">@SharedLocalizer["Foto"]</a></li>
+                                <li><a href="foto.html">@SharedLocalizer["Video"]</a></li>
+                                <li><a href="xeberler.html">@SharedLocalizer["Xəbərlər"]</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-6">
+                        <div class="contact-information top-pixel">
+                            <h5>
+                                @SharedLocalizer["Əlaqə"]
+                            </h5>
+
+                            <ul>
+                                <li>
+                                    <span><i class="fas fa-map-marked-alt"></i></span>
+                                    <a href="https://goo.gl/maps/KgKMgksm9UGpdNtP7">Atatürk pr. 140, Bakı</a>
+                                </li>
+
+                                <li>
+                                    <span><i class="fas fa-phone"></i></span>
+                                    <a href="tel:+994124658500">(012) 465 85 00</a>
+                                </li>
+
+                                <li>
+                                    <span><i class="fas fa-phone"></i></span>
+                                    <a href="tel:+994509408500">(055) 467 85 00</a>
+                                </li>
+
+                                <li>
+                                    <span><i class="far fa-envelope-open"></i></span>
+                                    <a href="mailto:info@istanbulns.az">info@istanbulns.az</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-4 col-sm-12 col-12">
+                        <div class="text-right">
+                            <span class="site">Designed by <a href="http://amg.az/" target="_blank">A Group Media</a></span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                        <div class="header-socials">
+                            <ul>
+                                <li>
+                                    <a href="https://www.facebook.com/istanbulklinikans" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                                </li>
+
+                                <li>
+                                    <a href="https://www.instagram.com/istanbul_ns_klinika/" target="_blank"><i class="fab fa-instagram"></i></a>
+                                </li>
+
+                                <li>
+                                    <a href="https://www.youtube.com/channel/UC1Hh6r6FYhdVXJq7kg6rtXw" target="_blank"><i class="fab fa-youtube"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-5 col-sm-12 col-12">
+
+                        <div class="text-left">
+                            <span>Copyright &copy; 2020 Istanbul NS Klinikası. @SharedLocalizer["Müəllif hüquqları qorunur"]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- End Footer -->
+    <!-- Font Awesome CDN -->
+
+
+    <script src="../code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+    <script src="~/indexlayout/js/jquery.js"></script>
+    <script src="~/indexlayout/OwlCarousel/owl.carousel.min.js"></script>
+    <script src="~/indexlayout/js/icons.js"></script>
+    <script src="../cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/popper.js"></script>
+    <script src="~/indexlayout/js/bootstrap.min.js"></script>
+    <script src="~/indexlayout/js/main.js"></script>
+    <div class="elfsight-app-fbd9d4dc-6e1c-439b-9d2a-6398738590b2"></div>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="../connect.facebook.net/az_AZ/sdk.js#xfbml=1&version=v5.0&appId=2493895410863360&autoLogAppEvents=1"></script>
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                800: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        })
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+
+<!-- Mirrored from istanbulns.az/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 20 Feb 2021 15:58:22 GMT -->
+</html>
+<!-- Baku Creative Projects (http://bcp.az) -->

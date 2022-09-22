@@ -1,0 +1,109 @@
+﻿@model List<IstanbulNsApp.Areas.Admin.Models.User>
+@using System.Net.Http;
+@using Microsoft.AspNetCore.Http;
+<style>
+    .table {
+        position: relative;
+    }
+
+        .table .thd {
+            position: sticky;
+            top: 0px;
+            z-index: 2;
+        }
+
+    .thd {
+        background-color: #4e73df;
+        color: white;
+    }
+    .deactive{
+        background-co
+    }
+
+    thead {
+        border-radius: 20px;
+    }
+
+    tr {
+        width: 100%;
+    }
+    /*table th:first-child {
+            border-radius: 15px 0 0 15px;
+        }
+
+        table th:last-child {
+            border-radius: 0 15px 15px 0;
+        }*/
+</style>
+<div class="container">
+    <div class="row" style="height:500px;overflow-y:scroll;">
+        <div class="col-12">
+            @if (Model is { })
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="thd" scope="col">Ad</th>
+                            <th class="thd" scope="col">Email</th>
+                            <th class="thd" scope="col">Vəzifə</th>
+                            <th class="thd" scope="col">Prosesslər</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="p-2">
+                        @foreach (var item in Model)
+                        {
+                            if (item.Id == Convert.ToInt32(Context.Session.GetString("UserId")))
+                            {
+                                
+                            }
+                            else
+                            {
+                        <tr>
+                            <th scope="row">@item.Name</th>
+                            <th scope="row">@item.Email</th>
+                           <th>@((IstanbulNsApp.Resources.Enums.RoleEnum.Roles)item.Role)</th>
+                  
+
+                            @if (item.IsDisabled == 0)
+                            {
+                                <td style="float:left;">
+                                    <a asp-action="Delete" asp-controller="User" asp-route-UserId=@item.Id asp-area="Admin"><i class="fas fa-trash-alt text-danger"></i></a>
+                                    <a asp-action="DeActivate" asp-controller="User" asp-area="Admin" asp-route-UserId="@item.Id"  class="btn btn-outline-dark">Deaktiv Et</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="float:left;width:100%;">
+                                    <a asp-action="Delete" asp-controller="User" asp-route-UserId=@item.Id asp-area="Admin"><i class="fas fa-trash-alt text-danger"></i></a>
+                                    <a asp-action="Activate" asp-controller="User" asp-area="Admin" asp-route-UserId="@item.Id" class="btn btn-outline-dark">AktivLəşdir</a>
+                                </td>
+                            }
+
+
+
+                        </tr>
+                            }
+
+                        }
+
+                    </tbody>
+                </table>
+            }
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @if (TempData["R_Message_User"] is { })
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: "@(TempData["R_Message_User"])"
+
+            })
+        </script>
+
+    }
+}

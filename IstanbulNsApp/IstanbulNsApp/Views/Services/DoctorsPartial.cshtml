@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "";
+}
+@model IstanbulNsApp.ViewModels.DoctorViewModel
+
+@foreach (var item in Model.Data)
+{
+    string type = string.Empty;
+
+    if (item.LevelType == 1)
+    {
+        type = "Dr.";
+    }
+    else if (item.LevelType == 2)
+    {
+        type = "T.e.c.";
+    }
+    else if (item.LevelType == 0)
+    {
+        type = string.Empty;
+    }
+    else
+    {
+        return;
+    }
+    <div class="col-lg-4 col-md-6 col-sm-6">
+        
+        <div class="our-doctor">
+            <a class="doctor-img" href="243-dr-altay-hsnov.html">
+                <div class="overlay"></div>
+                @if (item.Picture is null)
+                {
+                    if (item.Sex == 1)
+                    {
+                        <img src="~/indexlayout/uploads/posts/2020-03/1584355056_man.png" alt="@item.Name">
+                    }
+                    else
+                    {
+                        <img src="~/indexlayout/uploads/posts/2020-03/1584360828_woman.png" alt="@item.Name">
+                    }
+
+                }
+                else
+                {
+                    <img src="~/uploads/@item.Picture" alt="@item.Name">
+                }
+
+            </a>
+
+            <div class="info-doctor">
+                <a href="243-dr-altay-hsnov.html" class="doc-name">@type@item.Name</a>
+                <span>@item.DoctorLevel</span>
+                <a asp-action="DoctorsInfo" asp-controller="Services" asp-route-doctor="@item.Id">Daha ətraflı</a>
+            </div>
+        </div>
+    </div>
+}

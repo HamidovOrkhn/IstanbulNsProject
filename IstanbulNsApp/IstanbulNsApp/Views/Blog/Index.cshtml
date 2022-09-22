@@ -1,0 +1,29 @@
+﻿
+@{
+}
+@model List<Blog>
+@await Component.InvokeAsync("Partial")
+
+<section id="latest-news">
+    <div class="container">
+        <div class="row mt-3">
+            @foreach (var item in Model.OrderByDescending(i=>i.Date).Take(26))
+            {
+                <div class="col-12 col-sm-6">
+                    <a asp-action="single" asp-controller="blog" asp-route-id="@item.Id">
+                        <div class="last-content">
+                            <div class="last-images">
+                                <img src="~/indexlayout/images/@item.Photo" alt="ZƏHƏRLİ ZOBUN ƏLAMƏTLƏRİ !">
+                            </div>
+                            <div class="last-info">
+                                <h4>@item.Title</h4>
+                                <span>@item.Date</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>

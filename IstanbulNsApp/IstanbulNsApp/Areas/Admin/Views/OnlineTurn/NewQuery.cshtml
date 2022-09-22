@@ -1,0 +1,185 @@
+﻿@model IstanbulNsApp.Areas.Admin.ViewModels.OnlineTurnAddViewModel
+
+<div id='dle-content'>
+
+    <style>
+        .hours, .dates, .price, .info, .subject, .phones, .services, .doctors, .emails, #doctorapi {
+            width: 100%;
+            padding: 10px 20px;
+        }
+
+        .err {
+            color: red;
+        }
+
+        input.input-validation-error {
+            background: #FEF1EC;
+            border: 1px solid #CD0A0A;
+        }
+
+        select.input-validation-error {
+            background: #FEF1EC;
+            border: 1px solid #CD0A0A;
+        }
+    </style>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Xəta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @TempData["ServerResponseErrorAdmin"]
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary p-2 m-2" data-dismiss="modal">Bağla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Contact Section -->
+    <section id="contact">
+        <div class="bg-left">
+            <img src="~/indexlayout/images/bg-2.html" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12 col-lg-12 p-0 mb-auto mt-auto">
+                    <div class="main-contact">
+                        <div class="form-message">
+                            <div class="heading-form">
+                                <h4>Növbə Qeydiyyatı</h4>
+                            </div>
+                            <form method="post" asp-controller="OnlineTurn" asp-action="ConfirmReal" asp-area="Admin">
+                                <div class="form-group ">
+                                    <label asp-for="ServiceId"></label>
+                                    <select asp-for="ServiceId" class="services">
+                                        <option value="" selected>Xidməti seçin</option>
+                                        @foreach (var item in Model.Services)
+                                        {
+                                            <option value=@item.Id>@item.Name</option>
+                                        }
+
+
+
+                                    </select>
+                                    <span class="err" asp-validation-for="ServiceId"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="DoctorId"></label>
+                                    <select asp-for="DoctorId" id="doctorapi">
+                                        <option value="" selected>Həkimi seçin</option>
+
+
+
+
+                                    </select>
+                                    <span class="err" asp-validation-for="DoctorId"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="Date"></label>
+                                    <select asp-for="Date" class="dates">
+                                        <option value="" selected>Tarixi seçin</option>
+
+                                        @for (int i = 0; i < 7; i++)
+                                        {
+                                            <option>@DateTime.Now.AddDays(i).ToString("yyyy-MM-dd")</option>
+                                        }
+
+
+                                    </select>
+                                    <span class="err" asp-validation-for="Date"></span>
+
+                                </div>
+                                <div class="form-group">
+
+                                    <label asp-for="Hour"></label>
+                                    <select asp-for="Hour" class="hours">
+                                        <option value="" selected>Saatı seçin</option>
+                                        @for (double? i = 0; i <= 24; i += 0.5)
+                                        {
+                                            <option>@TimeSpan.FromHours((double)i).ToString(@"hh\:mm")</option>
+                                        }
+                                    </select>
+                                    <span class="err" asp-validation-for="Hour"></span>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label asp-for="PhoneNumber"></label>
+                                    <input class="phones" asp-for="PhoneNumber">
+                                    <span class="err" asp-validation-for="PhoneNumber"></span>
+                                </div>
+                                <div class="form-group ">
+                                    <label asp-for="Email"></label>
+                                    <input class="emails" asp-for="Email">
+                                    <span class="err" asp-validation-for="Email"></span>
+                                </div>
+                                <div class="form-group ">
+                                    <label asp-for="Subject"></label>
+                                    <input class="subject" type="text" asp-for="Subject">
+                                    <span class="err" asp-validation-for="Subject"></span>
+                                </div>
+                                <div class="form-group ">
+                                    <label asp-for="Price"></label>
+                                    <input class="price" type="text" asp-for="Price" value="" readonly>
+                                </div>
+                                <div class="form-group ">
+                                    <label asp-for="Info"></label>
+                                    <textarea class="info" asp-for="Info" rows="5"></textarea>
+                                </div>
+
+
+                                <div class="btn-div mb-5">
+                                    <button type="submit" class="btn btn-primary" name="submit">Göndər</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+@section Scripts{
+    <script>
+        $(".services").change(function () {
+            var id = $(this).val();
+            var str = [];
+
+            $.get("/Admin/OnlineTurn/GetDoctor?id=" + id, function (data) {
+                $("#doctorapi").empty();
+                str.push(" <option value= selected>Həkimi seçin</option>");
+                for (var i = 0; i < data.length; i++) {
+                    str.push("  <option value=" + data[i].id + " >" + data[i].name + "</option>")
+                }
+                $("#doctorapi").append(str);
+            })
+        })
+
+        $("#doctorapi").change(function () {
+            var id = $(this).val();
+            var str = [];
+
+            $.get("/Admin/OnlineTurn/GetDoctorPrice?id=" + id, function (data) {
+                console.log(data)
+                $(".price").val(data.price + " AZN");
+            })
+        })
+    </script>
+    @if (TempData["ServerResponseErrorAdmin"] is object)
+    {
+        <script>
+            $("#exampleModalCenter").modal("show");
+        </script>
+    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewData["Title"] = "OnlineTurnSection";
+}
+
+@model IstanbulNsApp.Areas.Admin.Models.OnlineTurnVm
+<style>
+    .table {
+        position: relative;
+    }
+
+        .table .thd {
+            position: sticky;
+            top: 0px;
+            z-index: 2;
+        }
+
+    .thd {
+        background-color: #4e73df;
+        color: white;
+    }
+
+    thead {
+        border-radius: 20px;
+    }
+
+    tr {
+        width: 100%;
+
+    }
+    tr,th{
+        text-align:center;
+    }
+    .operations{
+        display:flex;
+        flex-direction:row;
+        font-size:20px;
+    }
+    .operations>form{
+        margin-left:10px;
+        margin-top:1px;
+    }
+        .td > a {
+            margin-right: 10px;
+           
+        }
+    /*table th:first-child {
+        border-radius: 15px 0 0 15px;
+    }
+
+    table th:last-child {
+        border-radius: 0 15px 15px 0;
+    }*/
+</style>
+
+    <div class="row" style="height:500px;overflow-y:scroll;">
+        <h4>Aktiv Növbə</h4>
+        <div class="col-12">
+            @if (Model is { })
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="thd" scope="col">Kod</th>
+                            <th class="thd" scope="col">Xidmət</th>
+                            <th class="thd" scope="col">Həkim</th>
+                            <th class="thd" scope="col">Qiymət</th>
+                            <th class="thd" scope="col">Sıra Tarixi</th>
+                            <th class="thd" scope="col">Sifariş Tarixi</th>
+                            <th class="thd" scope="col">Əlaqə</th>
+                            <th class="thd" scope="col">Cavab</th>
+                            <th class="thd" scope="col">Proseslər</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="p-2">
+                        @foreach (var item in Model.queries.Where(a=>a.IsSchedule ==1))
+                        {
+                        <tr>
+                            <th>@item.Code</th>
+                            <td>@item.Doctor.Service.ServiceNames.Where(a => a.LangId == 1).FirstOrDefault().Name</td>
+                            <td>@item.Doctor.Name</td>
+                            <td>@item.Price AZN</td>
+                            <td>@item.QueryDate.ToString("MM/dd/yyyy HH:mm")</td>
+                            <td>@item.ServeDate.ToString("MM/dd/yyyy HH:mm")</td>
+                            <td>@item.PhoneNumber</td>
+                            @if (item.Pdf is null)
+                            {
+                                <td style="color:red;"><i class="fas fa-times-circle"></i></td>
+                            }
+                            else
+                            {
+                                <td style="color:green;"><i class="fas fa-check-circle"></i></td>
+                            }
+
+                        <td style="float:left;" class="operations">
+                            <a class="text-danger" asp-action="Disable" asp-controller="OnlineTurn" asp-route-query_id=@item.Id ><i class="fas fa-pause"></i></a>
+                           
+                            <form method="post" asp-action="AddResult"  enctype="multipart/form-data">
+                                @*<input type="image" src="~/indexlayout/images/folder.webp" width="20" />*@
+                                <input asp-for="File" id="my_file"  />
+                                <input type="hidden" asp-for="query_id" value=@item.Id />
+                                <button type="submit" class="btn btn-outline-primary file-submit" >Yüklə</button>
+                            </form>
+                            
+                        </td>
+
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+    <div class="row mt-2" style="height:500px;overflow-y:scroll;">
+        <h4>Deaktiv Növbə</h4>
+        <div class="col-12">
+            @if (Model is { })
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="thd" scope="col">Kod</th>
+                            <th class="thd" scope="col">Xidmət</th>
+                            <th class="thd" scope="col">Həkim</th>
+                            <th class="thd" scope="col">Qiymət</th>
+                            <th class="thd" scope="col">Sıra Tarixi</th>
+                            <th class="thd" scope="col">Sifariş Tarixi</th>
+                            <th class="thd" scope="col">Əlaqə</th>
+                            <th class="thd" scope="col">Cavab</th>
+                            <th class="thd" scope="col">Proseslər</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="p-2">
+                        @foreach (var item in Model.queries.Where(a => a.IsSchedule == 0))
+                        {
+                            <tr>
+                                <th>@item.Code</th>
+                                <td>@item.Doctor.Service.ServiceNames.Where(a => a.LangId == 1).FirstOrDefault().Name</td>
+                                <td>@item.Doctor.Name</td>
+                                <td>@item.Price AZN</td>
+                                <td>@item.QueryDate.ToString("MM/dd/yyyy HH:mm")</td>
+                                <td>@item.ServeDate.ToString("MM/dd/yyyy HH:mm")</td>
+                                <td>@item.PhoneNumber</td>
+                                @if (item.Pdf is null)
+                                {
+                                    <td style="color:red;"><i class="fas fa-times-circle"></i></td>
+                                }
+                                else
+                                {
+                                    <td style="color:green;"><i class="fas fa-check-circle"></i></td>
+                                }
+
+                            <td style="float:left;" class="operations">
+                                <a asp-action="Enable" asp-controller="OnlineTurn" asp-route-query_id=@item.Id style="margin-right:10px" class="text-success"><i class="fas fa-play"></i></a>
+                                <a asp-action="EndSession" asp-controller="OnlineTurn" asp-route-query_id=@item.Id class="text-danger"><i class="fas fa-trash-alt"></i></a>
+                             
+
+                            </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+@section Scripts{ 
+<script>
+    //$("input[type='image']").click(function () {
+    //    $("input[id='my_file']").click(function () {
+    //        $(".file-submit").show()
+    //    });
+    //});
+</script>
+}
+

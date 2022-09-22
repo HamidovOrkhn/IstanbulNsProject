@@ -1,0 +1,53 @@
+﻿@model IstanbulNsApp.ViewModels.DoctorViewModel
+@{ 
+    Layout = "";
+}
+@foreach (var item in Model.Data)
+{
+
+    string type = string.Empty;
+
+    if (item.LevelType == 1)
+    {
+        type = "Dr.";
+    }
+    else if (item.LevelType == 2)
+    {
+        type = "T.e.c.";
+    }
+    else if (item.LevelType == 0)
+    {
+        type = string.Empty;
+    }
+    else
+    {
+        return;
+    }
+
+<tr class="user_col">
+    <td class="align-middle">1</td>
+    @if (item.Picture is null)
+    {
+        if (item.Sex == 1)
+        {
+            <td><a asp-action="DoctorInfo" asp-controller="Doctors" asp-area="Admin" asp-route-doctorId="@item.Id"><img src="~/indexlayout/uploads/posts/2020-03/1584355056_man.png" width="50" class="avatar rounded-circle mr-1" alt="Avatar">@type @item.Name</a></td>
+
+
+        }
+        else
+        {
+            <td><a asp-action="DoctorInfo" asp-controller="Doctors" asp-area="Admin" asp-route-doctorId="@item.Id"><img src="~/indexlayout/uploads/posts/2020-03/1584360828_woman.png" width="50" class="avatar rounded-circle mr-1" alt="Avatar">@type @item.Name</a></td>
+
+        }
+
+    }
+    else
+    {
+        <td><a asp-action="DoctorInfo" asp-controller="Doctors" asp-area="Admin" asp-route-doctorId="@item.Id"><img src="~/uploads/@item.Picture" width="50" class="avatar rounded-circle mr-1" alt="Avatar">@type @item.Name</a></td>
+
+    }
+    <td class="align-middle">@item.DoctorLevel</td>
+    <td class="align-middle">@type</td>
+</tr>
+
+}

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<IstanbulNsApp.Resources.DTO.ServiceDTO>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using IstanbulNsApp.Repositories
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+<ul>
+    @foreach (var item in Model)
+    {
+        <li><a asp-action="Index" asp-controller="Services" asp-route-serve="@item?.Id" class="main-link">@item?.Name</a></li>
+    }
+
+
+    <li>
+        <a asp-action="AllServices" asp-controller="Services" class="main-link">@SharedLocalizer["Daha çox"]</a>
+    </li>
+
+
+
+</ul>

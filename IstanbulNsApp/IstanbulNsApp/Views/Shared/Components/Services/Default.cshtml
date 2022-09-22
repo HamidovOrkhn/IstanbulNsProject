@@ -1,0 +1,14 @@
+﻿
+@model IEnumerable<IstanbulNsApp.Resources.DTO.ServiceDTO>
+<div class="left-sidebar">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <a asp-action="Index" asp-controller="Services" asp-route-serve="@item?.Id" >@item?.Name</a>
+            </li>
+        }
+
+
+    </ul>
+</div>

@@ -1,0 +1,102 @@
+﻿
+@{
+}
+@model IstanbulNsApp.Repositories.ReturnMessage<BlogViewModel>
+<div id='dle-content'>
+    @await Component.InvokeAsync("Partial")
+    <section id="more-event">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-12">
+                        <div class="left-sidebar">
+                            <ul>
+                                @foreach (var item in Model.Data.Blogs)
+                                {
+                                    <li>
+                                        <a asp-action="single" asp-controller="Blog">@item.Title</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-8 col-sm-12 col-12">
+                        <div id="read-event">
+                            <h3>@Model.Data.Blog.Title</h3>
+                            <img src="~/indexlayout/images/@Model.Data.Blog.Photo" width="100" style="object-fit:cover" alt="Vaser liposaksiyası artıq İSTANBUL NS KLİNİKADA!">
+
+                            <div>
+                                <p>@Html.Raw(Model.Data.Blog.Text)</p>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hekimlerimiz">
+            <div class="container">
+                <div class="text-center">
+                    <h3>HƏKİMLƏRİMİZ</h3>
+                    <p>
+                        Yüksək ixtisaslı, təcrübəli və qayğıkeş həkimlərimiz sağlamlığınızın qorunması üçün sizə
+                        keyfiyyətli tibbi yardım göstərməyə hər zaman hazırdır! Onların qəbuluna saytımızdan yazıla
+                        bilərsiniz.
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 margin-top-30">
+                        <div class="our-doctor">
+                            <a class="doctor-img" href="238-dr-bhruz-mmmdov.html">
+                                <div class="overlay"></div>
+                                <img src="~/indexlayout/images/haqqimizdaa.jpg" alt="">
+                            </a>
+
+                            <div class="info-doctor">
+                                <a href="238-dr-bhruz-mmmdov.html" class="doc-name">Dr. Bəhruz Məmmədov</a>
+                                <span class="professional">Anestezioloq Reanimatoloq</span>
+                                <a href="#">QƏBULUNA YAZILMAQ</a>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id="dle-ajax-comments"></div>
+    <form method="post" name="dle-comments-form" id="dle-comments-form">
+        <input type="hidden" name="subaction" value="addcomment" />
+        <input type="hidden" name="post_id" id="post_id" value="247" />
+    </form>
+</div>
+
+<section id="innovation">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div>
+                    <h3>Yeniliklərimizdən məlumatlı olun!</h3>
+                    <p>
+                        Elektron poçtunuzun ünvanını qeyd edin ki, maraqlı xəbərlər və endirimli aksiyalarımızdan
+                        faydalana biləsiniz.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <form action="#">
+                    <input type="text" placeholder="">
+                    <input class="btn-write" type="submit" value="YAZILMAQ">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Start Footer -->

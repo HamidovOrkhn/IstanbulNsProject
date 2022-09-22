@@ -1,0 +1,88 @@
+﻿@model IstanbulNsApp.Areas.Admin.ViewModels.UserViewModel
+
+@{
+    ViewData["Title"] = "Qeydiyyat";
+}
+<style>
+
+</style>
+<h1>Qeydiyyat</h1>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form asp-action="AddUser" asp-controller="User" asp-area="Admin" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Name" class="control-label">Ad,Soyad</label>
+                                    <input asp-for="Name" class="form-control" placeholder="Ad,Soyad" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" placeholder="Email" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="SexId" class="control-label">Cinsiyyət</label>
+                                    <select asp-for="SexId" class="form-control">
+                                        <option value="">Cinsiyyət seçin</option>
+                                        <option value=1>Kişi</option>
+                                        <option value=2>Qadın</option>
+                                    </select>
+                                    <span asp-validation-for="SexId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Password" class="control-label">Şifrə</label>
+                                    <input type="password" asp-for="Password" class="form-control" placeholder="Şifrə" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="ConfirmPassword" class="control-label">Şifrə təkrarı</label>
+                                    <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Şifrə təkrarı" />
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Role" class="control-label"></label>
+                                    <select asp-for="Role" class="form-control">
+                                        <option value="">Vəzifə seçin</option>
+                                        <option value=1>Admin</option>
+                                        <option value=2>SubAdmin</option>
+                                    </select>
+                                    <span asp-validation-for="Role" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Yadda saxla" class="btn btn-primary" />
+                                    <a asp-action="Users" asp-controller="User" asp-area="Admin" class="btn btn-danger">Geri</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                   
+                </div>
+            </div>  
+        </div>
+     
+
+    </div>
+</div>
+
+
+@section Scripts{
+    @if (TempData["UserErrorRegistration"] is object)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: "@(TempData["UserErrorRegistration"])"
+
+            })
+        </script>
+    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

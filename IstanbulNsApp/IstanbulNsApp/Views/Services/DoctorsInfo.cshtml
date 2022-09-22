@@ -1,0 +1,135 @@
+﻿@model IstanbulNsApp.Resources.DTO.DoctorInfoDTO
+
+    <div id='dle-content'>
+        <link rel="stylesheet" href="../use.fontawesome.com/releases/v5.7.2/css/all.css"
+              integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/indexlayout/css/style.css">
+
+        <section id="doctor-main">
+            <div class="overlay-service"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-heading">
+                            <h3>HƏKİMLƏR</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-doc">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-6 col-sm-12">
+                        <div class="text-page">
+                            <h3>Həkim haqqında</h3>
+                        </div>
+                        @{ 
+                            string type = string.Empty;
+                            if (Model.LevelType == 1)
+                            {
+                                type = "Dr.";
+                            }
+                            else if(Model.LevelType == 2)
+                            {
+                                type = "T.e.c.";
+                            }
+                            else if (Model.LevelType == 0)
+                            {
+                                type = string.Empty;
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                        <div class="doctor-img">
+                            @if (Model.Picture is null)
+                            {
+                                if (Model.Sex == 1)
+                                {
+                                    <img src="~/indexlayout/uploads/posts/2020-03/1584355056_man.png" alt="@Model.Name">
+                                }
+                                else
+                                {
+                                    <img src="~/indexlayout/uploads/posts/2020-03/1584360828_woman.png" alt="@Model.Name">
+                                }
+
+                            }
+                            else
+                            {
+                                <img src="~/indexlayout/uploads/posts/2020-03/@Model.Picture" alt="@Model.Name">
+                            }
+                        </div>
+
+                        <div class="mt-5 text-justify">
+                            <div class="name-doc">
+                                <h3 class="mb-0"><b>@type@Model.Name</b></h3>
+                                <p>@Model.DoctorLevel</p>
+                            </div>
+
+                            <div>
+                                @Model.Info
+
+                                <br>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                        <div class="contact">
+                            <h5>Əlaqə</h5>
+
+                            <div class="contact-little">
+                                <div class="contact-unv mt-2">
+                                    <h3><span rel="2"></span>Ünvan</h3>
+                                    <p>
+                                        <span rel="3"></span>@Model.Location
+                                    </p>
+                                </div>
+                                <div class="contact-unv">
+                                    <h3><span rel="4"></span>Email</h3>
+                                    <p>
+                                        <span rel="5"></span>@Model.Email
+                                    </p>
+                                </div>
+                                <div class="contact-unv">
+                                    <h3><span rel="6"></span>Telefon</h3>
+                                    <p>
+                                        <span rel="7"></span>
+                                        @foreach (var item in Model.Phones)
+                                        {
+                                            @(item.PhoneNumber)<br />
+                                           
+                                        }
+                                        
+                                    </p>
+                                </div>
+                                <div class="contact-unv">
+                                    <h3><span rel="9"></span>İş Saatları</h3>
+                                    <p>
+                                        @{
+                                            var hourTo = TimeSpan.FromHours((int)Model.WorkTimeToTime).Hours;
+                                            var hourFrom = TimeSpan.FromHours((int)Model.WorkTimeFromTime).Hours;
+
+
+                                        }
+                                        <span rel="10"></span>
+                                        @Enum.GetName(typeof(DayOfWeek), Model.WorkTimeFromDate) – @Enum.GetName(typeof(DayOfWeek), Model.WorkTimeToDate)<br><span rel="11"></span>
+                                        @hourFrom:@(TimeSpan.FromMinutes((double)(Model.WorkTimeFromTime - Math.Truncate(Model.WorkTimeFromTime))).ToString("ss")) – @hourTo:@(TimeSpan.FromMinutes((double)(Model.WorkTimeToTime - Math.Truncate(Model.WorkTimeToTime))).ToString("ss"))
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="dle-ajax-comments"></div>
+        <form method="post" name="dle-comments-form" id="dle-comments-form">
+            <input type="hidden" name="subaction" value="addcomment" />
+            <input type="hidden" name="post_id" id="post_id" value="181" />
+        </form>
+    </div>

@@ -1,0 +1,82 @@
+﻿ <!-- End Header -->
+@model List<IstanbulNsApp.Resources.DTO.ServiceInfoMini>
+<div id='dle-content'>
+    <link rel="stylesheet" href="../use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/indexlayout/css/shobeler.css">
+
+    <section id="doctor-main">
+        <div class="overlay-service"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>TƏDBİRLƏR</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section id="more-event">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-12">
+                        @await Component.InvokeAsync("Services")
+                    </div>
+
+                    <div class="col-lg-9 col-md-8 col-sm-12 col-12 mb-5">
+                        <div class="departments">
+
+                            <p>
+                                İstanbul NS Klinikası çoxprofilli tibb müəssisəsidir. Onun ambulator və stasionar
+                                bölmələrində böyüklərə və uşaqlara diaqnostik və tibbi yardım xidmətlərinin göstərilməsi
+                                üçün bütün lazımi şöbələr mövcuddur. Hər bir şöbənin səhifəsini açıb onun fəaliyyəti və
+                                orada çalışan tibb işçiləri ilə tanış ola biləsiniz.
+                            </p>
+                        </div>
+
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                                    <div class="about-department">
+                                        <a href="anesteziologiya-ve-reanimasiya.html">
+                                            <div class="overlay"></div>
+                                            @if (item.Picture is null)
+                                            {
+                                                <img class="w-100" src="~/indexlayout/uploads/posts/2020-02/1582026072_whatsapp-image-2020-02-04-at-14.54.03.jpg" alt="Damar Cərrahiyyəsi">
+                                                //<img src="~/indexlayout/images/notfoundpicture.jpg" alt="@item.Name">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/indexlayout/images/@item?.Picture" alt="@item?.Name">
+                                            }
+
+                                        </a>
+
+                                        <h3>
+                                            <a asp-action="Index" asp-controller="Services" asp-route-serve="@item?.Id">@item?.Name</a>
+                                        </h3>
+                                    </div>
+                                </div>
+                            }
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </section>

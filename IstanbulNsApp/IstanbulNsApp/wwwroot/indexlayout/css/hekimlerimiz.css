@@ -1,0 +1,134 @@
+#doctors .hekimlerimiz {
+    background-color: #F1F2F9;
+    padding: 30px 0;
+}
+
+#doctors .hekimlerimiz h3 {
+    color: #013f96;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+}
+
+#doctors .hekimlerimiz p {
+    display: inline-block;
+    width: 500px;
+    color: #696969;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 50px;
+}
+
+#doctors .our-doctor {
+    background: white;
+    padding: 30px 50px
+}
+
+#doctors .doctor-img {
+    display: inline-block;
+    position: relative;
+}
+
+#doctors .doctor-img img {
+    width: 100%;
+}
+
+#doctors .doctor-img .overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0;
+    transition: .4s linear;
+}
+
+#doctors .doctor-img:hover .overlay {
+    opacity: .3;
+}
+
+#doctors .info-doctor {
+    padding: 20px 0 0;
+    text-align: center;
+}
+
+#doctors .info-doctor a.doc-name {
+    display: block;
+    position: relative;
+    font-size: 18px;
+    color: #013f96;
+    text-decoration: none;
+}
+
+#doctors .info-doctor a.doc-name:hover {
+    color: #72707d;
+}
+
+#doctors .info-doctor span {
+    display: block;
+    color: #828282;
+}
+
+#doctors .info-doctor a:last-child {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 13px 10px;
+    background-color: #013f96;
+    border-color: #013f96;
+    color: white;
+    transition: .4s ease-in-out;
+}
+
+#doctors .info-doctor a:last-child:hover {
+    color: #fff;
+    background-color: #ff7a01;
+    border-color: #ff7a01;
+    text-decoration: none;
+    transition: .4s ease-in-out;
+}
+
+.alphabet {
+    font-weight: bold;
+    font-size: 22px;
+    display: inline-block;
+    line-height: 2.4;
+    color: #013f96;
+    transition: .3s ease-in-out;
+}
+
+.alphabet:hover {
+    color: #ff7a01;
+    transition: .3s ease-in-out;
+}
+
+/* responsive design */
+
+@media (max-width: 575.98px) {
+    #doctors .hekimlerimiz .doctor-img {
+        display: block;
+    }
+
+    #doctors .our-doctor {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    #doctors .hekimlerimiz .margin-top-30 {
+        margin-top: 30px;
+    }
+
+    #doctors .hekimlerimiz p {
+        width: auto;
+    }
+}
+
+@media (min-width: 991.98px) {
+    #doctors .our-doctor {
+        margin-bottom: 30px;
+    }
+}

@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewData["Title"] = "Xidmət əlavə et";
+}
+<style>
+    .card-header {
+        background-color: #4e73df;
+        color: white;
+    }
+</style>
+@model IstanbulNsApp.Areas.ViewModels.AddServiceViewModel;
+<form asp-action="AddConfirm" asp-controller="Services" asp-area="Admin" id="AddForm" enctype="multipart/form-data">
+    <div class="container" style="overflow-y:scroll;height:550px;">
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">Xidmət adı (müxtəlif dil)</div>
+                    <div class="card-body">
+                        @if (Model.Langs is { })
+                        {
+                            for (int i = 0; i < Model.Langs.Count; i++)
+                            {
+                                <div class="form-group">
+                                    <label for="Name">Ad (@Model.Langs[i].Name)</label>
+                                    <input type="text" class="form-control Name@(i)" id="@Model.Langs[i].Id" required max="200" asp-for="Names" aria-describedby="emailHelp" placeholder="Xidmət adı">
+                                    <small id="emailHelp" class="form-text text-muted">@Model.Langs[i].Name dil açarında xidmət adı.</small>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">Xidmətin Təsviri</div>
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label for="Picture">Xidmətin Təsviri (Şəkil)</label>
+                            <input type="file" class="form-control" id="Picture" asp-for="Picture" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">Opsionaldır əgər yerləşdirməsəniz default boş şəkil yerləşəcəkdir.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="Picture">Tipi</label>
+                            <select class="form-control" asp-for="IsPayed">
+                                <option value=1>Ödənişli</option>
+                                <option selected value=0>Ödənişsiz</option>
+                            </select>
+                            <small id="emailHelp" class="form-text text-muted">Ödəniş tipi online olub olmadığını seçin</small>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card">
+
+                    <div class="card-header">Xidmət haqqında məlumat (müxtəlif dil)</div>
+                    <input type="hidden" value="@Model.Langs.Count" asp-for="NumberLang" id="langCount" />
+                    <div class="card-body">
+                        @if (Model.Langs is { })
+                        {
+                            for (int i = 0; i < Model.Langs.Count; i++)
+                            {
+                                <div class="form-group">
+                                    <label for="Info">Xidmət haqqında məlumat (@Model.Langs[i].Name)</label>
+                                    <input type="text" class="form-control Info@(i)" id="Info@(i)" required data-index-number="@Model.Langs[i].Id" asp-for="Infos" aria-describedby="emailHelp" placeholder="Xidmət haqqında məlumatı">
+                                    <small id="emailHelp" class="form-text text-muted">@Model.Langs[i].Name dil açarında xidmət haqqında məlumat.</small>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                    <div class="card-footer text-right" style="float:left;background-color:white !important;">
+                        <a asp-controller="Home" asp-action="Services" asp-area="Admin" class="btn btn-danger">Geri</a>
+                        <button class="btn btn-primary AddService">Əlavə et</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</form>
+@section Scripts{
+ <script>
+     $(document).ready(function () {
+         jQuery.extend(jQuery.validator.messages, {
+             required: "Zəhmət olmasa doldurun",
+             remote: "Please fix this field.",
+             email: "Email formatı düzgün deyil",
+             url: "Please enter a valid URL.",
+             date: "Please enter a valid date.",
+             dateISO: "Please enter a valid date (ISO).",
+             number: "Nömrə formatı düzgün deyil",
+             digits: "Please enter only digits.",
+             creditcard: "Please enter a valid credit card number.",
+             equalTo: "Şifrə uyğunlaşmır",
+             accept: "Please enter a value with a valid extension.",
+             maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+             minlength: jQuery.validator.format("{0} artıq simvol olmalıdır."),
+             rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+             range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+             max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+             min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+         });
+ </script>
+}
+

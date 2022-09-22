@@ -1,0 +1,160 @@
+﻿@model IstanbulNsApp.ViewModels.OnlineTurnViewModel
+
+<div id='dle-content'>
+    <section id="doctor-main">
+        <div class="overlay-service"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>Əlaqə</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .hours, .dates {
+            width: 100%;
+            padding: 10px 20px;
+        }
+       
+        span{
+            color:red;
+        }
+        input.input-validation-error {
+            background: #FEF1EC;
+            border: 1px solid #CD0A0A;
+        }
+
+        select.input-validation-error {
+            background: #FEF1EC;
+            border: 1px solid #CD0A0A;
+        }
+    </style>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Xəta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @TempData["ServerResponseError"]
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary p-2 m-2" data-dismiss="modal" >Bağla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start Contact Section -->
+    <section id="contact">
+        <div class="bg-left">
+            <img src="~/indexlayout/images/bg-2.html" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12 col-lg-12 p-0 mb-auto mt-auto">
+                    <div class="main-contact">
+                        <div class="form-message">
+                            <div class="heading-form">
+                                <h4>Təklif və iradlarınız üçün mesaj yazın.</h4>
+                            </div>
+                            <form method="post" asp-controller="OnlineTurn" asp-action="Confirm">
+                                <div class="form-group services">
+                                    <label asp-for="ServiceName"></label>
+                                    <input asp-for="ServiceName" readonly value="@Model?.OnlineData?.Service?.Name">
+                                </div>
+                                <div class="form-group doctors">
+                                    <label asp-for="DoctorName"></label>
+                                    <input asp-for="DoctorName" readonly value="@Model?.OnlineData?.DoctorSelected?.Name">
+                                </div>
+                                <input type="hidden" asp-for="ServiceId" value="@Model?.OnlineData?.Service?.Id" />
+                                <input type="hidden" asp-for="DoctorId" value="@Model?.OnlineData?.DoctorSelected?.Id" />
+                                <div class="form-group">
+                                    <label asp-for="Date"></label>
+                                    <select asp-for="Date" class="dates">
+                                        <option value="" selected>Tarixi seçin</option>
+
+                                        @for (int i = 0; i < 7; i++)
+                                        {
+                                            <option>@DateTime.Now.AddDays(i).ToString("yyyy-MM-dd")</option>
+                                        }
+
+
+                                    </select>
+                                    <span asp-validation-for="Date"></span>
+
+                                </div>
+                                <div class="form-group">
+                                    @{
+                                        decimal? time1 = Model?.OnlineData?.DoctorSelected?.DoctorInfo?.WorkTimeToTime;
+                                        decimal? time2 = Model?.OnlineData?.DoctorSelected?.DoctorInfo?.WorkTimeFromTime;
+                                        double? limit = (double?)time1;
+                                        double? start = (double?)time2;
+                                    }
+                                    <label asp-for="Hour"></label>
+                                    <select asp-for="Hour
+                                            " class="hours">
+                                        <option value="" selected>Saatı seçin</option>
+                                        @for (double? i = start; i <= limit; i += 0.5)
+                                        {
+                                            <option>@TimeSpan.FromHours((double)i).ToString(@"hh\:mm")</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="Hour"></span>
+                                </div>
+
+                                <div class="form-group phones">
+                                    <label asp-for="PhoneNumber"></label>
+                                    <input asp-for="PhoneNumber">
+                                    <span asp-validation-for="PhoneNumber"></span>
+                                </div>
+                                <div class="form-group emails">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email">
+                                    <span asp-validation-for="Email"></span>
+                                </div>
+                                <div class="form-group subject">
+                                    <label asp-for="Subject"></label>
+                                    <input type="text" asp-for="Subject">
+                                    <span asp-validation-for="Subject"></span>
+                                </div>
+                                <div class="form-group price">
+                                    <label asp-for="Price"></label>
+                                    <input type="text" asp-for="Price" value="@Model.OnlineData.DoctorSelected.Price AZN" readonly>
+                                </div>
+                                <div class="form-group info">
+                                    <label asp-for="Info"></label>
+                                    <textarea asp-for="Info" rows="5"></textarea>
+                                </div>
+
+
+                                <div class="btn-div">
+                                    <button type="submit" name="submit">Göndər</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+@section Scripts{
+    @if (TempData["ServerResponseError"] is object)
+    {
+        <script>
+            $("#exampleModalCenter").modal("show");
+        </script>
+    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

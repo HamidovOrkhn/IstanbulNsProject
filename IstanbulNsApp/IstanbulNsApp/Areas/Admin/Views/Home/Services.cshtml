@@ -1,0 +1,76 @@
+﻿@model List<IstanbulNsApp.Resources.DTO.ServiceDTO>
+<style>
+    .table {
+        position: relative;
+    }
+
+        .table .thd {
+            position: sticky;
+            top: 0px;
+            z-index: 2;
+        }
+
+    .thd {
+        background-color: #4e73df;
+        color: white;
+    }
+
+    thead {
+        border-radius: 20px;
+    }
+
+    tr {
+        width: 100%;
+    }
+    /*table th:first-child {
+        border-radius: 15px 0 0 15px;
+    }
+
+    table th:last-child {
+        border-radius: 0 15px 15px 0;
+    }*/
+</style>
+<div class="container">
+    <div class="row"><div class="col-12"><a class="btn btn-primary mb-2" asp-area="Admin" asp-action="Add" asp-controller="Services">Yeni</a></div></div>
+    <div class="row" style="height:500px;overflow-y:scroll;">
+        <div class="col-12">
+            @if (Model is { })
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="thd" scope="col">Xidmət adı</th>
+                            <th class="thd" scope="col">Proseslər</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="p-2">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th style="width:100%" scope="row">@item.Name</th>
+                                <td style="float:left;width:100%;"><a asp-action="Delete" asp-controller="Services" asp-route-query_id=@item.Id><i class="fas fa-trash-alt text-danger"></i></a> <a asp-action="Update" asp-controller="Services" asp-route-query_id=@item.Id><i class="fas fa-pen text-success"></i></a> </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            }
+
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @if (TempData["R_Message"] is { })
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: "@(TempData["R_Message"])"
+                
+            })
+        </script>
+
+    }
+}

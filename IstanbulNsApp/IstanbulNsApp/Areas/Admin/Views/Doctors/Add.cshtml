@@ -1,0 +1,211 @@
+﻿@model IstanbulNsApp.Areas.Admin.ViewModels.DoctorAddViewModel
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+
+<form asp-action="AddConfirm" method="post" enctype="multipart/form-data" asp-controller="Doctors" asp-area="Admin">
+    <h3>Həkim əlavə et</h3>
+    <hr />
+    <div class="container">
+        <div class="card mb-5">
+            <div class="card-header bg-primary text-white">Əsas məlumatlar</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label class="control-label">Ad,Soyad</label>
+                            <input required asp-for="Name" placeholder="Ad və Soyad" class="form-control" />
+                            <small>Həkimin adı və Soyadı</small>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Şöbə</label>
+                            <select required asp-for="ServiceId" class="form-control">
+                                <option value="">Şöbə seçin</option>
+                                @foreach (var item in Model.Services)
+                                {
+                                    <option value=@item.Id>@item.Name</option>
+                                }
+
+                            </select>
+                            <small>Həkimin aid olduğu şöbə</small>
+                            <span asp-validation-for="ServiceId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Dərəcəsi</label>
+                            <select asp-for="LevelType" class="form-control">
+                                <option value=1>Dr</option>
+                                <option value=2>T.e.c</option>
+                                <option value=0>Yoxdur</option>
+                            </select>
+                            <small>Həkimin elmi dərəcəsi</small>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Vəzifəsi</label>
+                            <input placeholder="Vəzifə" required asp-for="DoctorLevel" class="form-control" />
+                            <small>Həkimin vəzifəsi</small>
+                            <span asp-validation-for="DoctorLevel" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Cinsiyyət</label>
+                            <select asp-for="Sex" class="form-control">
+                                <option value=1>Kişi</option>
+                                <option value=2>Qadın</option>
+                            </select>
+                            <small>Həkimin cinsiyyəti</small>
+                            <span asp-validation-for="Sex" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-6">
+                        @if (Model.Langs is { })
+                        {
+                            for (int i = 0; i < Model.Langs.Count; i++)
+                            {
+                                <div class="form-group">
+                                    <label class="control-label">Haqqında məlumat (@Model.Langs[i].Name)</label>
+                                    <input required asp-for="InfoStrs" type="text" class="form-control" />
+                                    <small>Məlumat panosu (@Model.Langs[i].Name)</small>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card mb-2">
+            <div class="card-header bg-primary text-white">Əlaqə məlumatları</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input required asp-for="Email" type="email" placeholder="Email adresi" class="form-control" />
+                            <small>Həkimin Email adressi</small>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Ünvan</label>
+                            <input required asp-for="Location" type="text" placeholder="Ünvanı" class="form-control" />
+                            <small>Həkimin yaşadığı ünvan</small>
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Picture">Həkimin şəkli</label>
+                            <input type="file" class="form-control" id="Picture" asp-for="Picture" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">Opsionaldır əgər yerləşdirməsəniz default boş şəkil yerləşəcəkdir.</small>
+                        </div>
+                        <h4>Həkimin iş saatları</h4>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <select asp-for="WorkTimeFromDate" required class="form-control">
+                                <option value="">Başlama günü seçin</option>
+                                <option value=1>Bazar ertəsi</option>
+                                <option value=2>Çərşənbə axşamı</option>
+                                <option value=3>Çərşənbə</option>
+                                <option value=4>Cümə axşamı</option>
+                                <option value=5>Cümə</option>
+                                <option value=6>Şənbə</option>
+                                <option value=0>Bazar</option>
+                            </select>
+                            <small>İş günü seçimi (Başlama)</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <select asp-for="WorkTimeToDate" required class="form-control">
+                                <option value="">Bitmə günü seçin</option>
+                                <option value=1>Bazar ertəsi</option>
+                                <option value=2>Çərşənbə axşamı</option>
+                                <option value=3>Çərşənbə</option>
+                                <option value=4>Cümə axşamı</option>
+                                <option value=5>Cümə</option>
+                                <option value=6>Şənbə</option>
+                                <option value=0>Bazar</option>
+                            </select>
+                            <small>İş günü seçimi (Bitmə)</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <select asp-for="WorkTimeFromTime" required class="form-control">
+                                <option value=0.00>Bitmə günü seçin</option>
+                                @for (double? i = 0; i <= 24; i += 0.5)
+                                {
+                                    <option value=@i>@TimeSpan.FromHours((double)i).ToString(@"hh\:mm")</option>
+                                }
+                            </select>
+                            <small>İş saatı seçimi (Başlama)</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <select asp-for="WorkTimeToTime" required class="form-control">
+                                <option value=0.00>Bitmə günü seçin</option>
+                                @for (double? i = 0; i <= 24; i += 0.5)
+                                {
+                                    <option value=@i>@TimeSpan.FromHours((double)i).ToString(@"hh\:mm")</option>
+                                }
+                            </select>
+                            <small>İş saatı seçimi (Bitmə)</small>
+                        </div>
+                        <h4>Əlaqə nömrələri</h4>
+                        <div class="form-group">
+                            <label class="control-label">Telefon nömrəsi sayı</label>
+                            <input type="number" class="form-control" max="6" id="ph_number_count" value=2 />
+
+                        </div>
+                        <div class="phones">
+                            <div class="form-group">
+                                <label class="control-label">Telefon 1</label>
+                                <input type="text" required class="form-control" name="Phones" placeholder="(050) 555 44 33" />
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Telefon 2</label>
+                                <input type="text" required class="form-control" name="Phones" placeholder="(050) 555 44 33" />
+
+                            </div>
+                        </div>
+                        <div class="card-footer text-right" style="float:left;background-color:white !important;">
+                            <a asp-controller="Home" asp-action="Doctors" asp-area="Admin" class="btn btn-danger">Geri</a>
+                            <button type="submit" class="btn btn-primary">Əlavə et</button>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#ph_number_count").bind('keyup mouseup', function () {
+
+                $(".phones").empty();
+                var str = [];
+                for (var i = 1; i <= parseInt($(this).val()); i++) {
+                    var stradd = "<div class='form-group'>" +
+                        "<label class='control-label'>Telefon " + i + "</label>" +
+                        "<input type='text' required class='form-control' name='Phones' placeholder='(050) 555 44 33' />" +
+                        "</div>"
+                    str.push(stradd);
+                }
+                $(".phones").append(str)
+            });
+
+        })
+    </script>
+}
+

@@ -1,0 +1,485 @@
+﻿@model IstanbulNsApp.Areas.Admin.ViewModels.DoctorUpdateViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+
+<form asp-action="EditConfirm" method="post" enctype="multipart/form-data" asp-controller="Doctors" asp-area="Admin">
+    <h3>Həkim məlumatlarını dəyişdir</h3>
+    <hr />
+    <div class="container">
+        <div class="card mb-5">
+            <div class="card-header bg-primary text-white">Əsas məlumatlar</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="hidden" value="@Model.DoctorsBase.Id" asp-for="Id"/>
+                            <label class="control-label">Ad,Soyad</label>
+                            <input required asp-for="Name" value="@Model.DoctorsBase.Name" placeholder="Ad və Soyad" class="form-control" />
+                            <small>Həkimin adı və Soyadı</small>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Şöbə</label>
+                            <select required asp-for="ServiceId" class="form-control">
+                                <option value="">Şöbə seçin</option>
+                                @foreach (var item in Model.Services)
+                                {
+                                    if (Model.DoctorsBase.ServiceId == item.Id)
+                                    {
+                                        <option selected value=@item.Id>@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@item.Id>@item.Name</option>
+                                    }
+
+                                }
+
+                            </select>
+                            <small>Həkimin aid olduğu şöbə</small>
+                            <span asp-validation-for="ServiceId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Dərəcəsi</label>
+                            <select asp-for="LevelType" class="form-control">
+                                @switch (Model.DoctorsBase.LevelType)
+                                {
+                                    case 0:
+                                        <option selected value=0>Yoxdur</option>
+                                        <option value=1>Dr</option>
+                                        <option value=2>T.e.c</option>
+
+                                        break;
+                                    case 1:
+                                        <option value=0>Yoxdur</option>
+                                        <option selected value=1>Dr</option>
+                                        <option value=2>T.e.c</option>
+
+                                        break;
+                                    case 2:
+                                        <option value=0>Yoxdur</option>
+                                        <option value=1>Dr</option>
+                                        <option selected value=2>T.e.c</option>
+
+                                        break;
+
+
+
+                                    default:
+
+                                        break;
+                                }
+
+                            </select>
+                            <small>Həkimin elmi dərəcəsi</small>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Vəzifəsi</label>
+                            <input placeholder="Vəzifə" required asp-for="DoctorLevel" value="@Model.DoctorsBase.DoctorLevel" class="form-control" />
+                            <small>Həkimin vəzifəsi</small>
+                            <span asp-validation-for="DoctorLevel" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Cinsiyyət</label>
+                            <select asp-for="Sex" class="form-control">
+                                @switch (Model.DoctorsBase.Sex)
+                                {
+
+                                    case 1:
+                                        <option selected value=1>Kişi</option>
+                                        <option value=2>Qadın</option>
+                                        break;
+                                    case 2:
+                                        <option value=1>Kişi</option>
+                                        <option selected value=2>Qadın</option>
+                                        break;
+
+
+
+                                    default:
+
+                                        break;
+                                }
+
+                            </select>
+                            <small>Həkimin cinsiyyəti</small>
+                            <span asp-validation-for="Sex" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-6">
+
+                        @if (Model.Langs is { })
+                        {
+                            for (int i = 0; i < Model.Langs.Count; i++)
+                            {
+                                if (Model.DoctorsBase.InfoStrs.Any(a => a.LangId == Model.Langs[i].Id))
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Haqqında məlumat (@Model.Langs[i].Name)</label>
+                                        <input required asp-for="InfoStrs" type="text" value="@Model.DoctorsBase.InfoStrs[i].Info" class="form-control" />
+                                        <small>Məlumat panosu (@Model.Langs[i].Name)</small>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <label class="control-label">Haqqında məlumat (@Model.Langs[i].Name)</label>
+                                        <input required asp-for="InfoStrs" type="text" class="form-control" />
+                                        <small>Məlumat panosu (@Model.Langs[i].Name)</small>
+                                    </div>
+                                }
+
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        @{ 
+            var doctorInfos = Model.DoctorsBase.DoctorsInfos[0];
+        }
+        <div class="card mb-2">
+            <div class="card-header bg-primary text-white">Əlaqə məlumatları</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input required asp-for="Email" value="@doctorInfos.Email" type="email" placeholder="Email adresi" class="form-control" />
+                            <small>Həkimin Email adressi</small>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Ünvan</label>
+                            <input required asp-for="Location" type="text" value="@doctorInfos.Location" placeholder="Ünvanı" class="form-control" />
+                            <small>Həkimin yaşadığı ünvan</small>
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group row">
+                                <div class="col-md-10">
+                                    <label for="Picture">Həkimin şəkli</label>
+                                    <input type="file" class="form-control" id="Picture" asp-for="Picture" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">Opsionaldır əgər yerləşdirməsəniz default boş şəkil yerləşəcəkdir.</small>
+                                </div>
+                                <div class="col-md-2">
+                                    @if (Model.DoctorsBase.Picture is { })
+                                    {
+                                        <img class="rounded" width="120" src="~/uploads/@Model.DoctorsBase.Picture" />
+                                        <small class="form-text text-muted">Hal hazırki şəkil</small>
+                                        <input type="hidden" asp-for="ExistedPicture"  value="@Model.DoctorsBase.Picture.ToString().Replace("DoctorPictures/","")"/>
+                                    }
+                                    else
+                                    {
+                                        if (Model.DoctorsBase.Sex == 1)
+                                        {
+                                            <div class="profile mr-3">
+                                                <img src="~/indexlayout/uploads/posts/2020-03/1584355056_man.png" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+
+                                            </div>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="profile mr-3">
+                                                <img src="~/indexlayout/uploads/posts/2020-03/1584360828_woman.png" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+
+                                            </div>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <h4>Həkimin iş saatları</h4>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <select asp-for="WorkTimeFromDate" required class="form-control">
+                                @switch (doctorInfos.WorkTimeFromDate)
+                                {
+                                    case 0:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option  value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option selected value=0>Bazar</option>
+                                        break;
+                                    case 1:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option selected value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 2:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option  value=1>Bazar ertəsi</option>
+                                        <option selected value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 3:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option selected value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 4:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option selected value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 5:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option  value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option selected value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 6:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option  value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option selected value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+
+                                    default:
+
+                                        break;
+                                }
+
+                            </select>
+                            <small>İş günü seçimi (Başlama)</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <select asp-for="WorkTimeToDate" required class="form-control">
+                                @switch (doctorInfos.WorkTimeFromDate)
+                                {
+                                    case 0:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option selected value=0>Bazar</option>
+                                        break;
+                                    case 1:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option selected value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 2:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option value=1>Bazar ertəsi</option>
+                                        <option selected value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 3:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option selected value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 4:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option selected value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 5:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option selected value=5>Cümə</option>
+                                        <option value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+                                    case 6:
+                                        <option value="">Başlama günü seçin</option>
+                                        <option value=1>Bazar ertəsi</option>
+                                        <option value=2>Çərşənbə axşamı</option>
+                                        <option value=3>Çərşənbə</option>
+                                        <option value=4>Cümə axşamı</option>
+                                        <option value=5>Cümə</option>
+                                        <option selected value=6>Şənbə</option>
+                                        <option value=0>Bazar</option>
+                                        break;
+
+                                    default:
+
+                                        break;
+                                }
+
+                            </select>
+                            <small>İş günü seçimi (Bitmə)</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <select asp-for="WorkTimeFromTime" required class="form-control">
+                                <option value=0.00>Bitmə günü seçin</option>
+                                @for (double? i = 0; i <= 24; i += 0.5)
+                                {
+                                    if (doctorInfos.WorkTimeFromTime == (decimal)i)
+                                    {
+                                        <option selected value=@i>@TimeSpan.FromHours((double)i).ToString(@"hh\:mm")</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@i>@TimeSpan.FromHours((double)i).ToString(@"hh\:mm")</option>
+                                    }
+
+                                }
+                            </select>
+                            <small>İş saatı seçimi (Başlama)</small>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <select asp-for="WorkTimeToTime" required class="form-control">
+                                <option value=0.00>Bitmə günü seçin</option>
+                                @for (double? i = 0; i <= 24; i += 0.5)
+                                {
+                                    if (doctorInfos.WorkTimeToTime == (decimal)i)
+                                    {
+                                        <option selected value=@i>@TimeSpan.FromHours((double)i).ToString(@"hh\:mm")</option>
+                                    }
+                                    else
+                                    {
+                                        <option value=@i>@TimeSpan.FromHours((double)i).ToString(@"hh\:mm")</option>
+                                    }
+
+                                }
+                            </select>
+                            <small>İş saatı seçimi (Bitmə)</small>
+                        </div>
+                        <h4>Əlaqə nömrələri</h4>
+                        <div class="form-group">
+                            <label class="control-label">Telefon nömrəsi sayı</label>
+                            <input  type="hidden" value="@doctorInfos.Phones.Count" id="base_phone"/>
+                            <input type="number" disabled class="form-control" max="6" id="ph_number_count" value=@doctorInfos.Phones.Count />
+
+                        </div>
+                        <div class="old_phones">
+                            @for (int i = 0; i < doctorInfos.Phones.Count; i++)
+                            {
+                                <div class="form-group" id="oldphone@(i)">
+                                    <label class="control-label">Telefon @(i+1)</label>
+                                    <input type="text" required class="form-control" name="Phones" placeholder="(050) 555 44 33" value="@doctorInfos.Phones[i].PhoneNumber" />
+
+                                </div>
+                            }
+
+                        </div>
+                        <div class="phones">
+                           
+                        </div>
+                        <div class="card-footer text-right" style="float:left;background-color:white !important;">
+                            <a asp-controller="Home" asp-action="Doctors" asp-area="Admin" class="btn btn-danger">Geri</a>
+                            <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts{
+    @*<script>
+        $(document).ready(function () {
+            $("#ph_number_count").bind('keyup mouseup', function () {
+                var valnow = parseInt($(this).val());
+                var valold = parseInt($("#base_phone").val())
+                if (valnow < valold) {
+
+                    for (var i = valnow; i < valold; i++) {
+                        $("#oldphone" + i).hide();
+                        $("#oldphone" + i).children("input").prop('name').val('notincluded');
+                    }
+                    $(".phones").empty();
+                    
+                }
+                else if (valnow == valold) {
+                    return;
+                }
+                else {
+                    $(".phones").empty();
+                    var str = [];
+                    for (var i = 1; i <= parseInt($(this).val()); i++) {
+                        var stradd = "<div class='form-group'>" +
+                            "<label class='control-label'>Telefon " + i + "</label>" +
+                            "<input type='text' required class='form-control' name='Phones' placeholder='(050) 555 44 33' />" +
+                            "</div>"
+                        str.push(stradd);
+                    }
+                    $(".phones").append(str)
+                }
+               
+            });
+
+        })
+    </script>*@
+}
+

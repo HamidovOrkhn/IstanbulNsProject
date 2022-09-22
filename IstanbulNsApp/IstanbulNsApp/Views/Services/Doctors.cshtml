@@ -1,0 +1,219 @@
+﻿@model IstanbulNsApp.ViewModels.DoctorViewModel
+
+
+<div id='dle-content'>
+    <link rel="stylesheet" href="~/indexlayout/css/hekimlerimiz.css">
+    <section id="doctor-main">
+        <div class="overlay-service"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading">
+                        <h3>HƏKİMLƏRİMİZ</h3>
+                        <span class="text-white">(əlifba sırası ilə)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="doctors">
+        <div class="hekimlerimiz">
+            <div class="container">
+                <div class="text-center">
+                    <p>
+                        Yüksək ixtisaslı, təcrübəli və qayğıkeş həkimlərimiz sağlamlığınızın qorunması üçün sizə
+                        keyfiyyətli tibbi yardım göstərməyə hər zaman hazırdır! Onların qəbuluna saytımızdan yazıla
+                        bilərsiniz.
+                    </p>
+                </div>
+                <input type="hidden" id="numberofpages" value="@Model?.Number" />
+                <div class="row">
+                    <div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="a">A</a>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="b">B</a>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="c">C</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="ç">Ç</a>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="d">D</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="e">E</a>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="ə">Ə</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="f">F</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="g">G</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="h">H</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="x">X</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="i">İ</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="j">J</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="k">K</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="q">Q</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="l">L</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="m">M</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="n">N</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="o">O</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="ö">Ö</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="p">P</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="r">R</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="s">S</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="ş">Ş</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="t">T</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="u">U</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="ü">Ü</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="v">V</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="y">Y</a>
+                    </div><div class="col-lg-1 col-md-1 col-1">
+                        <a class="alphabet" asp-action="DoctorFind" asp-controller="Services" asp-route-st="z">Z</a>
+                    </div>
+                </div>
+
+                <div class="row mt-5 body_content">
+                    @foreach (var item in Model.Data)
+                    {
+                        string type = string.Empty;
+
+                        if (item.LevelType == 1)
+                        {
+                            type = "Dr.";
+                        }
+                        else if (item.LevelType == 2)
+                        {
+                            type = "T.e.c.";
+                        }
+                        else if (item.LevelType == 0)
+                        {
+                            type = string.Empty;
+                        }
+                        else
+                        {
+                            return;
+                        }
+
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="our-doctor">
+                                <a class="doctor-img" href="243-dr-altay-hsnov.html">
+                                    <div class="overlay"></div>
+                                    @if (item.Picture is null)
+                                    {
+                                        if (item.Sex == 1)
+                                        {
+                                            <img src="~/indexlayout/uploads/posts/2020-03/1584355056_man.png" alt="@item.Name">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/indexlayout/uploads/posts/2020-03/1584360828_woman.png" alt="@item.Name">
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <img src="~/uploads/@item.Picture" alt="@item.Name">
+                                    }
+
+                                </a>
+
+                                <div class="info-doctor">
+                                    <a href="243-dr-altay-hsnov.html" class="doc-name">@type@item.Name</a>
+                                    <span>@item.DoctorLevel</span>
+                                    <a asp-action="DoctorsInfo" asp-controller="Services" asp-route-doctor="@item.Id">Daha ətraflı</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="loadcontent">
+                    <div class="d-flex justify-content-center " style="display:none">
+                        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts{ 
+
+<script>
+    
+    var pagecount = 0;
+    var scrollocation = 500;
+    var numberpagetotal = parseInt($("#numberofpages").val());
+
+
+    $(window).scroll(function () {
+        if (numberpagetotal >= pagecount) {
+            console.log(Math.ceil($(window).scrollTop()) + "  " + $(document).height() + " " + $(window).height())
+            if (Math.ceil($(window).scrollTop()) + scrollocation + $(window).height() >= $(document).height()) {
+
+                if (scrollocation != 400) {
+                    scrollocation -= 100;
+                }
+                else {
+                    scrollocation = 400;
+                }
+
+                pagecount += 1;
+                var container = $(".body_content");
+                $(".loadcontent").show()
+                loadMoreData(pagecount);
+                
+            }
+
+        }
+        else {
+            $(".loadcontent").hide()
+        }
+    
+    });
+
+    function loadMoreData(pageCount) {
+        $.get("/Services/DoctorsPartial?page=" + pagecount, function (data) {
+            $(".body_content").append(data)
+        })
+       
+    };
+</script>
+
+}

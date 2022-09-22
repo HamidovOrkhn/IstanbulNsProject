@@ -1,0 +1,17 @@
+﻿@model List<IstanbulNsApp.Resources.DTO.LangDTO>
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle lang-dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        DİL
+    </button>
+    <div class="dropdown-menu lang-unordered-list" aria-labelledby="dropdownMenuButton">
+        @foreach (var item in Model)
+        {
+            <a class="dropdown-item" style="text-transform:uppercase" 
+               asp-action="SetLanguage" 
+               asp-controller="Home"
+               asp-route-Culture="@item.Key"
+               asp-route-ReturnUrl="@Context.Request.Path">@item.Name</a>
+        }
+    </div>
+</div>

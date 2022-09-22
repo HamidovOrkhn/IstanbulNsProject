@@ -1,0 +1,157 @@
+﻿
+@model IstanbulNsApp.ViewModels.DoctorViewModel;
+<div class="card">
+    <div class="card-body p-2">
+        <div class="container">
+            <div class="table mt-4 mb-4">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-5">
+                                <h2>User <b>Management</b></h2>
+                            </div>
+                            <div class="col-7 text-right">
+                                <a asp-action="Add" asp-controller="Doctors" asp-area="Admin" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover text-center ">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Ad,Soyad</th>
+                                <th>Vəzifə</th>
+                                <th>Dərəcə</th>
+                            </tr>
+                        </thead>
+                        <tbody class="doctors">
+                            @foreach (var item in Model.Data)
+                            {
+
+                                string type = string.Empty;
+
+                                if (item.LevelType == 1)
+                                {
+                                    type = "Dr.";
+                                }
+                                else if (item.LevelType == 2)
+                                {
+                                    type = "T.e.c.";
+                                }
+                                else if (item.LevelType == 0)
+                                {
+                                    type = string.Empty;
+                                }
+                                else
+                                {
+                                    return;
+                                }
+
+                                <tr class="user_col" id="@item.Id">
+                                    <td class="align-middle">1</td>
+                                    @if (item.Picture is null)
+                                    {
+                                        if (item.Sex == 1)
+                                        {
+                                            <td><a asp-action="DoctorInfo" asp-controller="Doctors" asp-area="Admin" asp-route-doctorId="@item.Id"><img src="~/indexlayout/uploads/posts/2020-03/1584355056_man.png" width="50" class="avatar rounded-circle mr-1" alt="Avatar">@type @item.Name</a></td>
+
+
+                                        }
+                                        else
+                                        {
+                                            <td><a asp-action="DoctorInfo" asp-controller="Doctors" asp-area="Admin" asp-route-doctorId="@item.Id"><img src="~/indexlayout/uploads/posts/2020-03/1584360828_woman.png" width="50" class="avatar rounded-circle mr-1" alt="Avatar">@type @item.Name</a></td>
+
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <td><a asp-action="DoctorInfo" asp-controller="Doctors" asp-area="Admin" asp-route-doctorId="@item.Id"><img src="~/uploads/@item.Picture" width="50" class="avatar rounded-circle mr-1" alt="Avatar">@type @item.Name</a></td>
+
+                                    }
+                                    <td class="align-middle">@item.DoctorLevel</td>
+                                    <td class="align-middle">@type</td>
+                                </tr>
+
+
+
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                    <div class="clearfix">
+                        <input type="hidden" id="pg_nm" value="@Model.Number" />
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link pagination-previous">Previos</a></li>
+                            @for (int i = 0; i < Model.Number; i++)
+                            {
+                                <li class="page-item pagination-click" id="@i"><a class="page-link">@(i+1)</a></li>
+                            }
+                            <li class="page-item"><a class="page-link pagination-next">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var pageId = 1;
+        $(document).ready(function () {
+
+            $(".pagination-click").click(function () {
+                var id = $(this).prop("id");
+                $.get("/Admin/Doctors/DoctorRaw?page=" + id, function (data) {
+                    $(".doctors").empty()
+                    $(".doctors").append(data)
+                    pageId = id;
+
+                })
+            })
+            //$(".user_col").click(function () {
+            //    window.location.replace("/Admin/Doctors/DoctorInfo?doctorId=" + $(this).attr('id'));
+            //})
+            //$(".pagination-previous").click(function () {
+            //    var id = $(this).prop("id");
+            //    if (pageId != 1 && pageId!= 1) {
+            //        $.get("/Admin/Doctors/DoctorRaw?page=" + (pageId - 1), function (data) {
+            //            $(".doctors").empty()
+            //            $(".doctors").append(data)
+            //            pageId = pageId - 1;
+
+            //        })
+            //    }
+
+            //})
+            //$(".pagination-next").click(function () {
+            //    var id = $(this).prop("id");
+            //    if (parseInt($("#pg_nm").val()) < pageId) {
+            //        $.get("/Admin/Doctors/DoctorRaw?page=" + (pageId + 1), function (data) {
+            //            $(".doctors").empty()
+            //            $(".doctors").append(data)
+            //            pageId = pageId + 1;
+
+            //        })
+            //    }
+
+            //})
+
+        });
+    </script>
+    @if (TempData["R_Message_Doc"] is { })
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: "@(TempData["R_Message_Doc"])"
+
+            })
+        </script>
+
+    }
+}

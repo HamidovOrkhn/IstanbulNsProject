@@ -1,0 +1,60 @@
+﻿@{
+}
+@model AboutUs
+@await Component.InvokeAsync("Partial")
+<section id="gallery">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="gallery-info">
+                    <p>
+                        @Html.Raw(Model.Text)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            @foreach (var item in Model.Photos)
+            {
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-0">
+                    <div class="one-photo">
+                        <div class="photo-overlay">
+                            <div class="photo-icon">
+                                <i class="fal fa-eye" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <img src="~/indexlayout/images/@item.Name" alt="">
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="row mt-5">
+            <div class="col-12 col-md-6">
+                <div class="iframe-gallery">
+                    <video style="width: 100%; height: 300px; object-fit: cover;" controls>
+                        <source src="~/indexlayout/video/@Model.Videos.Source" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="iframe-gallery">
+                    <iframe width="100%" height="300" src="https://www.youtube.com/embed/@Model.YoutubeSource"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="inner-slider">
+            <div class="inner-slide">
+                <img src="img/bg-15.html" alt="">
+            </div>
+            <i class="close fas fa-times"></i>
+        </div>
+    </div>
+
+</section> 
